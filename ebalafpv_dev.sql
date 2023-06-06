@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 28, 2023 at 08:33 AM
+-- Generation Time: Jun 06, 2023 at 11:43 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -24,11 +24,81 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `database_accounts`
+-- Table structure for table `dashboard2_accounts`
 --
 
-DROP TABLE IF EXISTS `database_accounts`;
-CREATE TABLE IF NOT EXISTS `database_accounts` (
+DROP TABLE IF EXISTS `dashboard2_accounts`;
+CREATE TABLE IF NOT EXISTS `dashboard2_accounts` (
+  `sno` int NOT NULL AUTO_INCREMENT,
+  `userName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `country` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  PRIMARY KEY (`sno`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Dumping data for table `dashboard2_accounts`
+--
+
+INSERT INTO `dashboard2_accounts` (`sno`, `userName`, `email`, `country`, `password`) VALUES
+(1, 'admin', 'admin@gmail.com', 'India', '$2y$10$Sq5uSQdWlPpS4PflSzk6b.58hM4eMnTgkclxiHR6NzSKGIErPfMxG'),
+(2, 'bogota', 'bogota@gmail.com', 'India', '$2y$10$wymCF2eNaowqiHPWO5HVJOsUZne4JFUc9C2ByG1F9OVdIbuMEcnUm');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dashboard2_customers`
+--
+
+DROP TABLE IF EXISTS `dashboard2_customers`;
+CREATE TABLE IF NOT EXISTS `dashboard2_customers` (
+  `customerId` int NOT NULL AUTO_INCREMENT,
+  `customerType` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `salutation` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `firstName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `lastName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `customerPhone` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `customerEmail` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `companyName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `Website` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `Creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Modified_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`customerId`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Dumping data for table `dashboard2_customers`
+--
+
+INSERT INTO `dashboard2_customers` (`customerId`, `customerType`, `salutation`, `firstName`, `lastName`, `customerPhone`, `customerEmail`, `companyName`, `Website`, `Creation_Date`, `Modified_Date`) VALUES
+(8, 'Business', 'Ms.', 'atul', 'atul', '123', 'Atul@gmail.com', 'mws', 'ZXC', '2023-06-02 08:17:12', '2023-06-02 08:17:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dashboard2_items`
+--
+
+DROP TABLE IF EXISTS `dashboard2_items`;
+CREATE TABLE IF NOT EXISTS `dashboard2_items` (
+  `itemId` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `unit` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `sellingPrice` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  PRIMARY KEY (`itemId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dashboard_accounts`
+--
+
+DROP TABLE IF EXISTS `dashboard_accounts`;
+CREATE TABLE IF NOT EXISTS `dashboard_accounts` (
   `Sno` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
@@ -39,20 +109,20 @@ CREATE TABLE IF NOT EXISTS `database_accounts` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `database_accounts`
+-- Dumping data for table `dashboard_accounts`
 --
 
-INSERT INTO `database_accounts` (`Sno`, `firstName`, `lastName`, `userName`, `email`, `password`) VALUES
+INSERT INTO `dashboard_accounts` (`Sno`, `firstName`, `lastName`, `userName`, `email`, `password`) VALUES
 (1, 'atul', 'Goyal', 'Atul22g', 'atul22g2468@gmail.com', '$2y$10$eqP4o0mVqzRDkj0.WPuF/ek96PEsqVh4Ort5HsqtW9HpjTb2IpUFK');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `database_customers`
+-- Table structure for table `dashboard_customers`
 --
 
-DROP TABLE IF EXISTS `database_customers`;
-CREATE TABLE IF NOT EXISTS `database_customers` (
+DROP TABLE IF EXISTS `dashboard_customers`;
+CREATE TABLE IF NOT EXISTS `dashboard_customers` (
   `customers_id` int NOT NULL AUTO_INCREMENT,
   `customerType` varchar(255) NOT NULL,
   `salutation` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -70,24 +140,23 @@ CREATE TABLE IF NOT EXISTS `database_customers` (
   `create_customer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_customer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customers_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `database_customers`
+-- Dumping data for table `dashboard_customers`
 --
 
-INSERT INTO `database_customers` (`customers_id`, `customerType`, `salutation`, `fName`, `lName`, `companyName`, `customerDisplayName`, `customerEmail`, `workPhone`, `mobile`, `Skype`, `Designation`, `Department`, `website`, `create_customer`, `update_customer`) VALUES
-(1, 'business', 'Mr', 'Atul', 'goyal', 'sjfn', 'dkcKCMD', 'dmv@gmail.com', '23r', 'cmdck', 'ddm', 'dmv', 'cklem', 'dvm', '2023-05-28 03:15:24', '2023-05-28 03:15:24'),
-(2, 'individual', 'Mr', 'Atul', 'goyal', 'sjfn', 'as', 'dmv@gmail.com', '23r', 'cmdck', 'ddm', 'dmv', 'cklem', 'dvm', '2023-05-28 03:20:52', '2023-05-28 03:20:52');
+INSERT INTO `dashboard_customers` (`customers_id`, `customerType`, `salutation`, `fName`, `lName`, `companyName`, `customerDisplayName`, `customerEmail`, `workPhone`, `mobile`, `Skype`, `Designation`, `Department`, `website`, `create_customer`, `update_customer`) VALUES
+(6, 'business', 'Mr', 'bogota', 'goyal', 'mws', 'iooi', 'Atul@gmail.com', '79', '0987', '98790', '9879', '9090', '9', '2023-06-06 06:19:04', '2023-06-06 06:19:04');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `database_items`
+-- Table structure for table `dashboard_items`
 --
 
-DROP TABLE IF EXISTS `database_items`;
-CREATE TABLE IF NOT EXISTS `database_items` (
+DROP TABLE IF EXISTS `dashboard_items`;
+CREATE TABLE IF NOT EXISTS `dashboard_items` (
   `itemId` int NOT NULL AUTO_INCREMENT,
   `productType` varchar(255) NOT NULL,
   `Name` varchar(255) NOT NULL,
@@ -95,14 +164,14 @@ CREATE TABLE IF NOT EXISTS `database_items` (
   `sellingPrice` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
   PRIMARY KEY (`itemId`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `database_items`
+-- Dumping data for table `dashboard_items`
 --
 
-INSERT INTO `database_items` (`itemId`, `productType`, `Name`, `unit`, `sellingPrice`, `Description`) VALUES
-(1, 'goods', 'a', 'box', '1', 'a');
+INSERT INTO `dashboard_items` (`itemId`, `productType`, `Name`, `unit`, `sellingPrice`, `Description`) VALUES
+(7, 'goods', 'oi', 'dz', 'iojoi', 'iooi');
 
 -- --------------------------------------------------------
 
