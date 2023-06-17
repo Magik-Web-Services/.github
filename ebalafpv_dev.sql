@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 06, 2023 at 11:43 AM
+-- Generation Time: Jun 17, 2023 at 11:45 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -24,26 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dashboard2_accounts`
+-- Table structure for table `api_students`
 --
 
-DROP TABLE IF EXISTS `dashboard2_accounts`;
-CREATE TABLE IF NOT EXISTS `dashboard2_accounts` (
-  `sno` int NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `country` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  PRIMARY KEY (`sno`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+DROP TABLE IF EXISTS `api_students`;
+CREATE TABLE IF NOT EXISTS `api_students` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `round` int NOT NULL,
+  `course` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `dashboard2_accounts`
+-- Dumping data for table `api_students`
 --
 
-INSERT INTO `dashboard2_accounts` (`sno`, `userName`, `email`, `country`, `password`) VALUES
-(1, 'admin', 'admin@gmail.com', 'India', '$2y$10$Sq5uSQdWlPpS4PflSzk6b.58hM4eMnTgkclxiHR6NzSKGIErPfMxG'),
-(2, 'bogota', 'bogota@gmail.com', 'India', '$2y$10$wymCF2eNaowqiHPWO5HVJOsUZne4JFUc9C2ByG1F9OVdIbuMEcnUm');
+INSERT INTO `api_students` (`id`, `name`, `email`, `round`, `course`) VALUES
+(1, 'Kabir Hossain', 'kabir@gmail.com', 41, 'WPDF'),
+(2, 'Helal Uddin', 'helal@gmail.com', 41, 'WPDF'),
+(3, 'Mahmuda Akter', 'mahmuda@gmail.com', 41, 'WPDF'),
+(4, 'Habibur Rahman', 'habib@gmail.com', 41, 'WPDF'),
+(5, 'Nusrat Jahan', 'nusrat@gmail.com', 41, 'WPDF');
 
 -- --------------------------------------------------------
 
@@ -54,25 +57,66 @@ INSERT INTO `dashboard2_accounts` (`sno`, `userName`, `email`, `country`, `passw
 DROP TABLE IF EXISTS `dashboard2_customers`;
 CREATE TABLE IF NOT EXISTS `dashboard2_customers` (
   `customerId` int NOT NULL AUTO_INCREMENT,
-  `customerType` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `salutation` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `firstName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `lastName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `customerPhone` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `customerEmail` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `companyName` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `Website` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `customerType` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `salutation` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `firstName` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `lastName` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `customerPhone` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `customerEmail` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `companyName` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `Website` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
   `Creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Modified_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customerId`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
 -- Dumping data for table `dashboard2_customers`
 --
 
-INSERT INTO `dashboard2_customers` (`customerId`, `customerType`, `salutation`, `firstName`, `lastName`, `customerPhone`, `customerEmail`, `companyName`, `Website`, `Creation_Date`, `Modified_Date`) VALUES
-(8, 'Business', 'Ms.', 'atul', 'atul', '123', 'Atul@gmail.com', 'mws', 'ZXC', '2023-06-02 08:17:12', '2023-06-02 08:17:12');
+INSERT INTO `dashboard2_customers` (`customerId`, `user_id`, `customerType`, `salutation`, `firstName`, `lastName`, `customerPhone`, `customerEmail`, `companyName`, `Website`, `Creation_Date`, `Modified_Date`) VALUES
+(1, 1, 'Business', 'Salutation', 'Atul', 'Goyal', '0123456789', 'atu@gmail.com', 'MWS', 'zxc', '2023-06-15 09:36:56', '2023-06-15 09:36:56'),
+(3, 3, 'Business', 'Salutation', 'Atul', 'Goyal', '0123456789', 'atu@gmail.com', 'MWS', 'zxc', '2023-06-15 09:43:59', '2023-06-15 09:43:59'),
+(4, 1, 'Business', 'Salutation', 'Bogota', 'bogota', '0123456789', 'bogota@gmail.com', 'MWS', 'zxc', '2023-06-15 09:45:46', '2023-06-15 09:45:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dashboard2_invoices`
+--
+
+DROP TABLE IF EXISTS `dashboard2_invoices`;
+CREATE TABLE IF NOT EXISTS `dashboard2_invoices` (
+  `invoice_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `customerName` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `invoice` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `orderNumber` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `InvoiceDate` date NOT NULL,
+  `Terms` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `expireyDate` date NOT NULL,
+  `salesperson` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `subject` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `subTotal` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `Discount` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `discount2` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `Adjustment` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `TCS` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `total` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `termsAndConditions` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `files` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  PRIMARY KEY (`invoice_id`)
+) ;
+
+--
+-- Dumping data for table `dashboard2_invoices`
+--
+
+INSERT INTO `dashboard2_invoices` (`invoice_id`, `user_id`, `customerName`, `invoice`, `orderNumber`, `InvoiceDate`, `Terms`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`, `creation_Date`, `files`) VALUES
+(1, 1, 'Bogota bogota', '001', '1234', '2023-06-02', 'NET 45', '2023-06-09', '2', 'subject', '200', '10', '%', '10', 'gold tax', '190', 'tcs', '{\"name\":[\"item\"],\"qty\":[\"2\"],\"unit\":[\"box\"],\"rate\":[\"100\"],\"amount\":[\"200.00\"]}', '2023-06-15 10:11:38', '');
 
 -- --------------------------------------------------------
 
@@ -83,37 +127,91 @@ INSERT INTO `dashboard2_customers` (`customerId`, `customerType`, `salutation`, 
 DROP TABLE IF EXISTS `dashboard2_items`;
 CREATE TABLE IF NOT EXISTS `dashboard2_items` (
   `itemId` int NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `unit` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `sellingPrice` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-  `description` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `type` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `name` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `unit` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `sellingPrice` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `description` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `qty` int NOT NULL,
+  `amount` int NOT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modification_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`itemId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Dumping data for table `dashboard2_items`
+--
+
+INSERT INTO `dashboard2_items` (`itemId`, `user_id`, `type`, `name`, `unit`, `sellingPrice`, `description`, `qty`, `amount`, `creation_date`, `modification_date`) VALUES
+(1, 1, 'Good', 'item', 'box', '100', 'zxc', 0, 0, '2023-06-15 09:37:33', '2023-06-15 09:37:33'),
+(2, 3, 'Good', 'item', 'box', '123', 'zxc', 0, 0, '2023-06-15 09:44:18', '2023-06-15 09:44:18');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dashboard_accounts`
+-- Table structure for table `dashboard2_quote`
 --
 
-DROP TABLE IF EXISTS `dashboard_accounts`;
-CREATE TABLE IF NOT EXISTS `dashboard_accounts` (
-  `Sno` int NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(255) NOT NULL,
-  `lastName` varchar(255) NOT NULL,
-  `userName` varchar(255) NOT NULL,
-  `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`Sno`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `dashboard2_quote`;
+CREATE TABLE IF NOT EXISTS `dashboard2_quote` (
+  `quote_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `customerName` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `invoice` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `orderNumber` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `quoteDate` date NOT NULL,
+  `expireyDate` date NOT NULL,
+  `salesperson` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `subject` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `subTotal` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `Discount` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `discount2` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `Adjustment` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `TCS` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `total` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `termsAndConditions` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `creation_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `files` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  PRIMARY KEY (`quote_id`)
+) ;
 
 --
--- Dumping data for table `dashboard_accounts`
+-- Dumping data for table `dashboard2_quote`
 --
 
-INSERT INTO `dashboard_accounts` (`Sno`, `firstName`, `lastName`, `userName`, `email`, `password`) VALUES
-(1, 'atul', 'Goyal', 'Atul22g', 'atul22g2468@gmail.com', '$2y$10$eqP4o0mVqzRDkj0.WPuF/ek96PEsqVh4Ort5HsqtW9HpjTb2IpUFK');
+INSERT INTO `dashboard2_quote` (`quote_id`, `user_id`, `customerName`, `invoice`, `orderNumber`, `quoteDate`, `expireyDate`, `salesperson`, `subject`, `subTotal`, `Discount`, `discount2`, `Adjustment`, `TCS`, `total`, `termsAndConditions`, `items`, `creation_Date`, `files`) VALUES
+(1, 1, 'Atul Goyal', '2345', '1234', '2023-06-15', '2023-06-16', '1', 'subject', '100', '0', '%', '55', 'gold tax', '155', 'Terms And Conditions', '{\"name\":[\"item\"],\"qty\":[\"1\"],\"unit\":[\"box\"],\"rate\":[\"100\"],\"amount\":[\"100\"]}', '2023-06-15 10:15:53', ''),
+(2, 1, 'Atul Goyal', '2345', '1234', '2023-06-10', '2023-06-06', '4', 'subject', '100', '0', '%', '32', 'gold tax', '132', 'Terms And Conditions', '{\"name\":[\"item\"],\"qty\":[\"1\"],\"unit\":[\"box\"],\"rate\":[\"100\"],\"amount\":[\"100\"]}', '2023-06-15 10:20:29', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dashboard2_users`
+--
+
+DROP TABLE IF EXISTS `dashboard2_users`;
+CREATE TABLE IF NOT EXISTS `dashboard2_users` (
+  `sno` int NOT NULL AUTO_INCREMENT,
+  `userName` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `email` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `country` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `password` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `role` varchar(255) COLLATE latin1_spanish_ci NOT NULL,
+  `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`sno`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Dumping data for table `dashboard2_users`
+--
+
+INSERT INTO `dashboard2_users` (`sno`, `userName`, `email`, `country`, `password`, `role`, `register_date`) VALUES
+(1, 'admin', 'admin@gmaill.com', 'India', '$2y$10$GSyJRzk89J9NrCmql2HqnOrB8b.DaLo/oJLJJjxFCFWJpII5DKetW', 'admin', '2023-06-09 11:06:46'),
+(2, 'Atul', 'atul@gmail.com', 'India', '$2y$10$oWMHoZ1kWxBjSZAN19NmDu7E0Qbv8bDZVUHmp8KRsGRxCEltvNs76', 'customers', '2023-06-09 11:17:56'),
+(3, 'bogota', 'bogota@gmail.com', 'India', '$2y$10$X3JTOgwemEz6jCfCB3rPpu8iQvAsNlV3nS0O2Y6qnEqIrUtZ2Sm7u', 'customers', '2023-06-15 07:27:43');
 
 -- --------------------------------------------------------
 
@@ -125,18 +223,18 @@ DROP TABLE IF EXISTS `dashboard_customers`;
 CREATE TABLE IF NOT EXISTS `dashboard_customers` (
   `customers_id` int NOT NULL AUTO_INCREMENT,
   `customerType` varchar(255) NOT NULL,
-  `salutation` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `fName` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `lName` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `salutation` varchar(255) NOT NULL,
+  `fName` varchar(255) NOT NULL,
+  `lName` varchar(255) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `customerDisplayName` varchar(255) NOT NULL,
   `customerEmail` varchar(255) NOT NULL,
   `workPhone` varchar(255) NOT NULL,
-  `mobile` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `mobile` varchar(255) NOT NULL,
   `Skype` varchar(255) NOT NULL,
   `Designation` varchar(255) NOT NULL,
   `Department` varchar(255) NOT NULL,
-  `website` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `website` varchar(255) NOT NULL,
   `create_customer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_customer` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customers_id`) USING BTREE
@@ -147,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `dashboard_customers` (
 --
 
 INSERT INTO `dashboard_customers` (`customers_id`, `customerType`, `salutation`, `fName`, `lName`, `companyName`, `customerDisplayName`, `customerEmail`, `workPhone`, `mobile`, `Skype`, `Designation`, `Department`, `website`, `create_customer`, `update_customer`) VALUES
-(6, 'business', 'Mr', 'bogota', 'goyal', 'mws', 'iooi', 'Atul@gmail.com', '79', '0987', '98790', '9879', '9090', '9', '2023-06-06 06:19:04', '2023-06-06 06:19:04');
+(6, 'business', 'Mr', 'atul', 'goyal', 'mws', 'mws', 'atul@gmaill.com', '123', '123', 'atul', 'zxc', 'zxc', 'zxc', '2023-06-06 06:57:38', '2023-06-06 06:57:38');
 
 -- --------------------------------------------------------
 
@@ -164,14 +262,7 @@ CREATE TABLE IF NOT EXISTS `dashboard_items` (
   `sellingPrice` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
   PRIMARY KEY (`itemId`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `dashboard_items`
---
-
-INSERT INTO `dashboard_items` (`itemId`, `productType`, `Name`, `unit`, `sellingPrice`, `Description`) VALUES
-(7, 'goods', 'oi', 'dz', 'iojoi', 'iooi');
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -194,8 +285,8 @@ CREATE TABLE IF NOT EXISTS `day2_form` (
 --
 
 INSERT INTO `day2_form` (`Sno`, `UserName`, `Email`, `Password`, `CPassword`) VALUES
-(1, 'Atul', 'atul22g2468@gmail.com', '123', '123'),
-(2, 'Atul', 'atul22g2468@gmail.com', 'asdf', 'asdf');
+(1, 'Atul', 'atul22g2468@gmail.com', 'asd', 'asd'),
+(2, 'asd', 'asd@gmail.com', 'asd', 'asd');
 
 -- --------------------------------------------------------
 
